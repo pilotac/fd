@@ -12,6 +12,7 @@ on:
       - master
     tags:
       - '*'
+      - '!*-rc.*'
 
 permissions:
   contents: read
