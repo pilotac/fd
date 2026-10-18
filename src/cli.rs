@@ -385,6 +385,7 @@ pub struct Opts {
     #[arg(
         long = "extension",
         short = 'e',
+        alias = "ext",
         value_name = "ext",
         help = "Filter by extension",
         long_help

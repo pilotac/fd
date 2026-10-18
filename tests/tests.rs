@@ -3137,3 +3137,17 @@ fn test_sanitize_recursive_link_msg() {
         "[fd error]: File system loop found: ./loop/foo\\x1Bb points to an ancestor ./loop",
     );
 }
+
+/// Feature #5: `--ext` is accepted as an alias for `--extension`
+#[test]
+fn feat_5_ext_alias_matches_extension() {
+    let te = TestEnv::new(DEFAULT_DIRS, DEFAULT_FILES);
+
+    te.assert_output(
+        &["--ext", "foo"],
+        "a.foo
+        one/b.foo
+        one/two/c.foo
+        one/two/three/d.foo",
+    );
+}
