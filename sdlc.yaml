@@ -1,0 +1,68 @@
+version: v1
+name: fd
+traceability:
+  mode: warn
+release_naming:
+  format: semver-v-strict
+  mapping: R1
+stages:
+  planning:
+    require_milestone: true
+    require_issues_assigned: true
+  development:
+    branch: master
+    deploy_target: dev
+    required_checks:
+      - Extract crate metadata
+      - Ensure 'cargo fmt' has been run
+      - Ensure 'cargo clippy' has no warnings
+      - Minimum supported rust version
+      - x86_64-apple-darwin (macos-26-intel)
+      - aarch64-pc-windows-msvc (windows-11-arm)
+      - i686-pc-windows-msvc (windows-2025)
+      - i686-unknown-linux-musl (ubuntu-24.04)
+      - i686-unknown-linux-gnu (ubuntu-24.04)
+      - x86_64-pc-windows-msvc (windows-2025)
+      - x86_64-pc-windows-gnu (windows-2025)
+      - x86_64-unknown-linux-gnu (ubuntu-24.04)
+      - aarch64-apple-darwin (macos-26)
+      - aarch64-unknown-linux-gnu (ubuntu-24.04)
+      - x86_64-unknown-linux-musl (ubuntu-24.04)
+      - arm-unknown-linux-musleabihf (ubuntu-24.04)
+      - arm-unknown-linux-gnueabihf (ubuntu-24.04)
+      - aarch64-unknown-linux-musl (ubuntu-24.04)
+    required_reviewers:
+      min_approvals: 1
+  testing:
+    branch_pattern: master
+    required_checks:
+      - Extract crate metadata
+      - Ensure 'cargo fmt' has been run
+      - Ensure 'cargo clippy' has no warnings
+      - Minimum supported rust version
+      - x86_64-apple-darwin (macos-26-intel)
+      - aarch64-pc-windows-msvc (windows-11-arm)
+      - i686-pc-windows-msvc (windows-2025)
+      - i686-unknown-linux-musl (ubuntu-24.04)
+      - i686-unknown-linux-gnu (ubuntu-24.04)
+      - x86_64-pc-windows-msvc (windows-2025)
+      - x86_64-pc-windows-gnu (windows-2025)
+      - x86_64-unknown-linux-gnu (ubuntu-24.04)
+      - aarch64-apple-darwin (macos-26)
+      - aarch64-unknown-linux-gnu (ubuntu-24.04)
+      - x86_64-unknown-linux-musl (ubuntu-24.04)
+      - arm-unknown-linux-musleabihf (ubuntu-24.04)
+      - arm-unknown-linux-gnueabihf (ubuntu-24.04)
+      - aarch64-unknown-linux-musl (ubuntu-24.04)
+    required_reviewers:
+      min_approvals: 1
+  evidencing:
+    required_reviewers:
+      min_approvals: 1
+  deployment:
+    target: production
+    deploy_workflow: .github/workflows/CICD.yml
+    deploy_on_tag: true
+    required_checks: []
+    promotion: manual
+    requires_evidence_approval: true
